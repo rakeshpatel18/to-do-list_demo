@@ -5,13 +5,13 @@ import { PORT } from "./config/config.js";
 import Path from 'path'
 
 let app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended : true}));
+app.use(cors());
 const root = Path.join(Path.resolve()+"/dist")
 app.use(express.static(root))
 
 
-app.use(express.json());
-app.use(express.urlencoded({extended : true}));
-app.use(cors());
 
 app.use(AllRoutes);
 app.get("/{*splat}",(req ,res)=>{
